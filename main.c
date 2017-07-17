@@ -10,4 +10,5 @@ int main(int argc, char **argv)
     {
         printf("%s\n", dev);
     }
+	printf("%s\n", dev);
 }
