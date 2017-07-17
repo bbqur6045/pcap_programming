@@ -74,8 +74,7 @@ int main(int argc, char *argv[])
 	/* Grab a packet */
 
 	
-	while(1)
-	{
+	
 	packet = pcap_next(handle, &header);	
         
 	ethh =(struct ether_header *)packet;
@@ -89,21 +88,22 @@ int main(int argc, char *argv[])
         tcph =(struct tcphdr *)packet;
 
 	packet += sizeof(struct tcphdr);
+	printf("%02x:",ethh->ether_shost[0]);
 
 	printf("-------------------------\n");
-
-	printf("eth.smac = "); 
-        for(j=0;j<10;j++)
+	
+	while(1)
 	{
-		fprintf(stdout,"%02x:",ethh->ether_shost[j]); 
-	}
+	printf("eth.smac = "); 
+       
+	printf("%02x:%02x:%02x:%02x:%02x:%02x:",ethh->ether_shost[0],ethh->ether_shost[1],ethh->ether_shost[2],ethh->ether_shost[3],ethh->ether_shost[4],ethh->ether_shost[5]);	
 	printf("\n");
 	
 	printf("eth.dmac = "); 
-        for(j=0;j<10;j++)
-	{
-	printf("%02x:",ethh->ether_dhost[j]);
-	}
+      
+	printf("%02x:%02x:%02x:%02x:%02x:%02x:",ethh->ether_dhost[0],ethh->ether_dhost[1],ethh->ether_dhost[2],ethh->ether_dhost[3],ethh->ether_dhost[4],ethh->ether_dhost[5]); 
+
+	
  
 	printf("\n");
 
@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 			printf("%02x ",*packet);
 			packet++;
 
-			if(j % 20 == 0 && j!=0)
+			if(j % 16 == 0 )
 			printf("\n");
 
 	}
