@@ -1,4 +1,4 @@
-nclude <netinet/in.h>
+#include <netinet/in.h>
 #include <stdint.h>
 #include <pcap.h>
 #include <stdio.h>
